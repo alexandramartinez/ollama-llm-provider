@@ -5,6 +5,7 @@ Mule application implementing Salesforce's LLM Open Connector using the MAC proj
 - [salesforce/einstein-platform](https://github.com/salesforce/einstein-platform)
 - [Einstein Platform Cookbook](https://opensource.salesforce.com/einstein-platform/)
 - [The MuleSoft AI Chain project](https://mac-project.ai/)
+- [Use the LLM Open Connector to Build Generative AI Solutions Using Your Preferred Models and Platforms](https://developer.salesforce.com/blogs/2024/10/build-generative-ai-solutions-with-llm-open-connector)
 
 ## Similar repos
 
