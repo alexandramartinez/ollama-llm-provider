@@ -1,0 +1,7 @@
+{
+  "applicationName": "ollama-llm-provider",
+  "runtime": "4.8.1:6e-java17",
+  "replicas": 1,
+  "replicaSize": "0.1",
+  "deploymentModel": "rolling"
+}
