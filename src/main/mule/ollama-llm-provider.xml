@@ -5,7 +5,7 @@
         <http:listener-connection host="0.0.0.0" port="8081" />
     </http:listener-config>
     <apikit:config name="llm-open-connector-config" api="resource::your-org-id:llm-open-connector:1.0.0:oas:zip:llm-open-connector.yaml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
-    <ms-aichain:config configType="Configuration Json" filePath='#[(mule.home default "") ++ "/apps/" ++ (app.name default "") ++ "/llm-config.json"]' llmType="OLLAMA" modelName="#[vars.inputPayload.model]" name="MAC_Config" temperature="#[vars.inputPayload.temperature]" maxTokens="#[vars.inputPayload.max_tokens]"></ms-aichain:config>
+    <ms-aichain:config configType="Configuration Json" filePath='#[(mule.home default "") ++ "/apps/" ++ (app.name default "") ++ "/llm-config.json"]' llmType="OLLAMA" modelName="#[vars.inputPayload.model default 'llama3']" name="MAC_Config" temperature="#[vars.inputPayload.temperature default 1]" maxTokens="#[vars.inputPayload.max_tokens default 500]"></ms-aichain:config>
     <flow name="llm-open-connector-main">
         <http:listener config-ref="llm-open-connector-httpListenerConfig" path="/api/*">
             <http:response statusCode="#[vars.httpStatus default 200]">
@@ -164,13 +164,13 @@ output application/json
             finish_reason: "stop",
             index: 0,
             message: {
-                content: payload.response,
-                role: vars.inputPayload.messages[0].role
+                content: payload.response default "",
+                role: "assistant"
             }
         }
     ],
     created: now() as Number,
-    model: vars.inputPayload.model,
+    model: vars.inputPayload.model default "",
     object: "chat.completion",
     usage: {
         completion_tokens: (attributes.tokenUsage.outputCount default 0) as Number,
